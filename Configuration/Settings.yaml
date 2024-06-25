@@ -1,0 +1,16 @@
+Neos:
+  Neos:
+    modules:
+      management:
+        submodules:
+          bulkTitleImporter:
+            label: 'SEO-Titel importieren'
+            description: ''
+            icon: 'fa fa-file-import'
+            controller: 'CodeQ\BulkTitleImporter\Controller\ImportModuleController'
+            privilegeTarget: 'CodeQ.BulkTitleImporter:CanImportTitles'
+
+CodeQ:
+  BulkTitleImporter:
+    overrideNodeUriPathSuffix: null
+    nodeProperty: 'titleOverride'

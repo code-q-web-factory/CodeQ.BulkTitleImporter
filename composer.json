@@ -1,0 +1,27 @@
+{
+    "description": "",
+    "type": "neos-package",
+    "name": "codeq/bulktitleimporter",
+    "require": {
+        "neos/neos": "^7.0 || ^8.0 || dev-master",
+        "neos/neos-ui": "^7.0 || ^8.0 || dev-master",
+        "phpoffice/phpspreadsheet": "^2.1.0",
+        "sitegeist/fusionlinkprototypes": "v1.0.1",
+        "php": ">=7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodeQ\\BulkTitleImporter\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CodeQ\\BulkTitleImporter\\Tests\\": "Tests/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "CodeQ.BulkTitleImporter"
+        }
+    }
+}

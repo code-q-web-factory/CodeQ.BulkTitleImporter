@@ -1,0 +1,63 @@
+include: 'resource://Neos.Fusion/Private/Fusion/**/*'
+include: 'resource://Neos.Fusion.Form/Private/Fusion/**/*'
+include: resource://Sitegeist.FusionLinkPrototypes/Private/Fusion/Root.fusion
+
+CodeQ.BulkTitleImporter.ImportModuleController {
+  index = Neos.Fusion:Component {
+    renderer = afx`
+      <Neos.Fusion.Form:Form form.target.action="import">
+        <div class="neos-row-fluid">
+          <fieldset class="neos-span5">
+            <Neos.Fusion.Form:FieldContainer label="Arbeitsbereich" field.name="targetWorkspaceName">
+              <Neos.Fusion.Form:Select attributes.style="width:100%;margin-bottom: 1rem;">
+                <Neos.Fusion:Loop items={workspaces}>
+                  <Neos.Fusion.Form:Select.Option attributes.value={item.name}>
+                    {item.title}
+                  </Neos.Fusion.Form:Select.Option>
+                </Neos.Fusion:Loop>
+              </Neos.Fusion.Form:Select>
+            </Neos.Fusion.Form:FieldContainer>
+            <Neos.Fusion.Form:FieldContainer label="Datei auswählen" field.name="file">
+              <Neos.Fusion.Form:Input attributes.type="file" attributes.required={true}/>
+            </Neos.Fusion.Form:FieldContainer>
+          </fieldset>
+        </div>
+
+        <div class="neos-footer">
+          <Neos.Fusion.Form:Button attributes.class="neos-button-success">Importieren</Neos.Fusion.Form:Button>
+        </div>
+      </Neos.Fusion.Form:Form>
+    `
+  }
+
+  import = Neos.Fusion:Component {
+    indexActionUri = Sitegeist.FusionLinkPrototypes:ModuleUri {
+      action = 'index'
+      absolute = true
+    }
+    workspaceActionUri = Sitegeist.FusionLinkPrototypes:ModuleUri {
+      module = 'management/workspaces'
+      action = 'show'
+      arguments.workspace.__identity = ${targetWorkspaceName}
+    }
+    renderer = afx`
+      <div class="neos-row-fluid">
+        <fieldset class="neos-span5">
+          <legend>Es wurden {importResult.importedNodes} Nodes erfolgreich aktualisiert.</legend>
+          <Neos.Fusion:Fragment @if={Array.length(importResult.errors)}>
+            <legend>Es konnten {Array.length(importResult.errors)} URLs nicht gefunden werden:</legend>
+            <table class="neos-table">
+              <Neos.Fusion:Loop items={importResult.errors}>
+                <tr><td>{item}</td></tr>
+              </Neos.Fusion:Loop>
+            </table>
+          </Neos.Fusion:Fragment>
+        </fieldset>
+      </div>
+        <div class="neos-footer">
+          <a href={props.indexActionUri} class="neos-button">Zurück</a>
+          <a href={props.workspaceActionUri} class="neos-button neos-button-primary">Änderungen überprüfen</a>
+        </div>
+    `
+  }
+}
