@@ -18,7 +18,7 @@ CodeQ.BulkTitleImporter.ImportModuleController {
               </Neos.Fusion.Form:Select>
             </Neos.Fusion.Form:FieldContainer>
             <Neos.Fusion.Form:FieldContainer label="Datei auswählen" field.name="file">
-              <Neos.Fusion.Form:Input attributes.type="file" attributes.required={true}/>
+              <Neos.Fusion.Form:Input attributes.type="file" attributes.accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" attributes.required={true}/>
             </Neos.Fusion.Form:FieldContainer>
           </fieldset>
         </div>
